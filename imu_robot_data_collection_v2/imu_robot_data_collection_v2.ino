@@ -2,10 +2,13 @@
   Using the BNO08x IMU
 
   This example shows how to output accelerometer values.
+  Udpdate: Altered to also record gyro values and timestamp
 
   By: Nathan Seidle
+  Modified by: Luka Pearson
   SparkFun Electronics
   Date: December 21st, 2017
+  Date Modified: April 14th, 2026
   SparkFun code, firmware, and software is released under the MIT License.
 	Please see LICENSE.md for further details.
 
