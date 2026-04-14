@@ -29,11 +29,18 @@ while not lidar_done:
                 left_motor = forward_speed + turn_speed
                 right_motor = forward_speed - turn_speed
                 
-                robot.Ctrl_Car(0, 0, int(30*left_motor))
-                robot.Ctrl_Car(1, 0, int(30*left_motor))
-        
-                robot.Ctrl_Car(2, 0, int(30*right_motor))
-                robot.Ctrl_Car(3, 0, int(30*right_motor))
+                if left_motor >= 0:
+                    robot.Ctrl_Car(0, 0, int(30*left_motor))
+                    robot.Ctrl_Car(1, 0, int(30*left_motor))
+                if left_motor < 0:
+                    robot.Ctrl_Car(0, 1, -1 * int(30*left_motor))
+                    robot.Ctrl_Car(1, 1, -1 * int(30*left_motor))
+                if right_motor >= 0:
+                    robot.Ctrl_Car(2, 0, int(30*right_motor))
+                    robot.Ctrl_Car(3, 0, int(30*right_motor))
+                if right_motor < 0:
+                    robot.Ctrl_Car(2, 1, -1 * int(30*right_motor))
+                    robot.Ctrl_Car(3, 1, -1 * int(30*right_motor))
 
                 print("Left Motor: ", int(30*left_motor))
                 print("Right Motor: ", int(30*right_motor))
