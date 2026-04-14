@@ -63,6 +63,7 @@ class LidarRecording:
             if self.thread:
                 self.thread.join()
 
+
             self.dist_data = np.array(self.dist_data)
             self.angle_data = np.array(self.angle_data)
             self._qual_data = np.array(self._qual_data)

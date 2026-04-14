@@ -17,7 +17,9 @@ robot = Raspbot()
 
 lidar_list = [LidarRecording()]
 
-while True:
+lidar_done = False
+
+while not lidar_done:
     try:
         for event in pygame.event.get():
             if event.type == pygame.JOYAXISMOTION:
@@ -39,12 +41,14 @@ while True:
             if event.type == pygame.JOYBUTTONDOWN:
                 if event.button == 3:
                     if not lidar_list[-1].recording:
-                        lidar_list.start()
+                        lidar_list[-1].start()
                         print("LiDAR recording has started.")
                     else:
                         lidar_list[-1].stop()
                         lidar_list.append(LidarRecording())
                         print("LiDAR recording has stopped.")
+                if event.button == 4:
+                   lidar_done = True
 
     except KeyboardInterrupt as e:
         robot.Ctrl_Car(0, 0, 0)
