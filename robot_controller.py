@@ -56,11 +56,7 @@ while not lidar_done:
                     else:
                         lidar_inst.stop()
                         # Writes the LiDAR data to a csv file.
-                        angle_data = lidar_inst.angle_data
-                        dist_data = lidar_inst.dist_data
-                        time_data = lidar_inst.time_data
-                        qual_data = lidar_inst._qual_data
-                        stuff_for_the_file = zip(angle_data, dist_data, time_data, qual_data)
+                        stuff_for_the_file = zip(lidar_inst.angle_data, lidar_inst.dist_data, lidar_inst.time_data)
                         file_name = f'lidar_record_{recording_count}.csv'
                         with open(file_name, 'w', newline='') as file:
                             writer = csv.writer(file)
