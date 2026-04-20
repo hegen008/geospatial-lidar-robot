@@ -93,7 +93,7 @@ class IMUSerialLogger:
 ''' example usage:
 from imu_logger_threaded import IMUSerialLogger
 
-logger = IMUSerialLogger(port="COM5", baud=115200, csv_path="imu_data.csv")
+logger = IMUSerialLogger(port='/dev/ttyUSB1', baud=115200, csv_path="imu_data.csv")
 
 logger.start()
 time.sleep(10)   # collect data for 10 seconds
