@@ -8,10 +8,10 @@ Arlan Hegenbarth, Max Kortebein, Alec Olson, Luka Pearson, Will Weatherhead
 This project is an attempt at creating a robot that can map out the area it's in while moving around. We accomplish this by combining a driveable robot, LiDAR system, and IMU module. 
 
 ## Contents:
-imu_integration.py: Calculates the velocity and position from the start to get relative position.\
-imu_logger.py: Collects the IMU data as the robot moves.\
-lidar.py: Collects and process LiDAR data from the robot.\
-robot_controller.py: Controls robot movement and calls other programs to records IMU and LiDAR data.
+**imu_integration.py:** Calculates the velocity and position from the start to get relative position.\
+**imu_logger.py:** Collects the IMU data as the robot moves.\
+**lidar.py:** Collects and process LiDAR data from the robot.\
+**robot_controller.py:** Controls robot movement and calls other programs to records IMU and LiDAR data.
 
 ## How to Use:
 *This assumes that both the LiDAR and IMU sensors are attaches to the robot.*
