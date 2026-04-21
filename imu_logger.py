@@ -55,7 +55,7 @@ class IMUSerialLogger:
                 print("Skipping non-numeric line:", line)
                 continue
 
-            timestamp_us = int(time.time() * 1_000_000)
+            timestamp_us = time.time()
 
             with open(self.csv_path, "a", newline="") as f:
                 writer = csv.writer(f)

@@ -4,6 +4,8 @@ import time
 import csv
 from Raspbot_Lib import Raspbot
 from lidar import LidarRecording
+import imu_logger
+
 pygame.init()
 
 pygame.joystick.init()
@@ -21,6 +23,10 @@ lidar_inst = LidarRecording()
 lidar_done = False
 
 recording_count = 0
+
+# Initialize IMU logger instance and start recording
+imu_logger = imu_logger.IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_path='data/imu_output.csv')
+imu_logger.start()
 
 while not lidar_done:
     try:
@@ -57,10 +63,10 @@ while not lidar_done:
                         lidar_inst.stop()
                         # Writes the LiDAR data to a csv file.
                         stuff_for_the_file = zip(lidar_inst.angle_data, lidar_inst.dist_data, lidar_inst.time_data)
-                        file_name = f'lidar_record_{recording_count}.csv'
+                        file_name = f'data/lidar_record_{recording_count}.csv'
                         with open(file_name, 'w', newline='') as file:
                             writer = csv.writer(file)
-                            write.writerow(['angle', 'distance', 'unix_time'])
+                            writer.writerow(['angle', 'distance', 'unix_time'])
                             writer.writerows(stuff_for_the_file)
                         
                         # Creates a new LidarRecording instance
@@ -77,3 +83,5 @@ while not lidar_done:
         robot.Ctrl_Car(3, 0, 0)
         break
         
+# Stop recording IMU data
+imu_logger.stop()
