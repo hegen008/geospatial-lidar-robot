@@ -15,9 +15,9 @@ robot_controller.py: Controls robot movement and calls other programs to records
 
 ## How to Use:
 *This assumes that both the LiDAR and IMU sensors are attaches to the robot.*
-1. Connect a controller: We connected an XBox wireless controller to drive the robot. You can do this by clicking the bluetooth symbol in the top right of the Raspberry Pi's home screen, and then click "Connect Device". From there make sure your remote is in pairing mmode, and follow the given instructions.
-2. Start robot_controller.py: In the terminal, cd into robot_controller.py's parent directory. Then, run robot_controller.py as a python script (ex. python -m robot_controller.py).
-3. Control the robot: The top left joystick controls movement of the robot. The X button starts and stops LiDAR recording. The Y button exits robot_controller.py.
+1. **Connect a controller:** We connected an XBox wireless controller to drive the robot. You can do this by clicking the bluetooth symbol in the top right of the Raspberry Pi's home screen, and then click "Connect Device". From there make sure your remote is in pairing mmode, and follow the given instructions.
+2. **Start robot_controller.py:** In the terminal, cd into robot_controller.py's parent directory. Then, run robot_controller.py as a python script (ex. python -m robot_controller.py).
+3. **Control the robot:** The top left joystick controls movement of the robot. The X button starts and stops LiDAR recording. The Y button exits robot_controller.py.
 4. Using the LiDAR data, one can use other software/programs to map out the area in which data was recorded.
 
 ## About the Data:
