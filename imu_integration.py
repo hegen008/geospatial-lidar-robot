@@ -10,15 +10,6 @@ class IMUIntegrator:
         # Load input CSV
         self.df = pd.read_csv(csv_path)
 
-        # Normalize timestamps to seconds
-        ts_max = self.df['timestamp_us'].max()
-        if ts_max > 1e12:          # nanoseconds
-            self.df['timestamp_us'] /= 1_000_000_000
-        elif ts_max > 1e10:        # microseconds
-            self.df['timestamp_us'] /= 1_000_000
-        elif ts_max > 1e6:         # milliseconds
-            self.df['timestamp_us'] /= 1000
-
         n = len(self.df)
         self.position = np.zeros((n, 2))  # px, py
         self.velocity = np.zeros((n, 2))  # vx, vy
