@@ -32,6 +32,7 @@ imu_logger = imu_logger.IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_pa
 imu_logger.start()
 
 time.sleep(5)
+print("Ready for driving!")
 
 while not lidar_done:
     try:
