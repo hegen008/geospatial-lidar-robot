@@ -31,6 +31,8 @@ recording_count = 0
 imu_logger = imu_logger.IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_path='data/imu_output.csv')
 imu_logger.start()
 
+time.sleep(5)
+
 while not lidar_done:
     try:
         for event in pygame.event.get():
