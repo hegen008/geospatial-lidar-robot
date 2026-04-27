@@ -45,7 +45,7 @@ class IMUSerialLogger:
 
             parts = line.split(",")
 
-            if len(parts) != 7:
+            if len(parts) != 6:
                 print("Skipping malformed line:", line)
                 continue
 
