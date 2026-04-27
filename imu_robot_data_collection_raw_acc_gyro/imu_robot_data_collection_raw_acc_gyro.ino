@@ -117,18 +117,12 @@ void loop() {
       
       // uint64_t timeStamp = myIMU.getTimeStamp();
 
-      //acceleration
+      //acceleration (m/s^2)
       float x = myIMU.getAccelX();
       float y = myIMU.getAccelY();
       float z = myIMU.getAccelZ();
 
-      //quaterions
-      //float qw = myIMU.getQuatReal();
-      //float qx = myIMU.getQuatI();
-      //float qy = myIMU.getQuatJ();
-      //float qz = myIMU.getQuatK();
-
-      // gyro (linear acceleration)
+      // gyro (angular velocity, rad/sec)
       float gx = myIMU.getGyroX();
       float gy = myIMU.getGyroY();
       float gz = myIMU.getGyroZ();
@@ -140,7 +134,7 @@ void loop() {
       Serial.print(F(","));
       Serial.print(z, 2);
       
-      // quaterions
+      // gryo
       Serial.print(F(","));
       Serial.print(gx, 2);
       Serial.print(F(","));
