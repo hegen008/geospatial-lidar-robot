@@ -1,5 +1,5 @@
 import pygame
-import sys
+import os,shutil
 import time
 import csv
 from Raspbot_Lib import Raspbot
@@ -19,6 +19,10 @@ joysticks = [pygame.joystick.Joystick(x) for x in range(pygame.joystick.get_coun
 joystick = joysticks[0]
 
 joystick.init()
+
+# Clear data folder
+shutil.rmtree("./data")
+os.mkdir("./data")
 
 # Initialize robot
 robot = Raspbot()
@@ -112,11 +116,11 @@ while True:
         lidar_data = pd.read_csv("data/lidar_record_{count}.csv")
 
         # Fill in robot position
-        lidar_data[['robot_x', 'robot_y']] = lidar_data['unix_time'].apply(imu.location_from_time).apply(pd.Series)
+        lidar_data[['robot_x', 'robot_y', 'robot_dir']] = lidar_data['unix_time'].apply(imu.location_from_time).apply(pd.Series)
 
         # Calculate lidar position
-        lidar_data['x'] = lidar_data['robot_x'] + lidar_data['distance'] * np.cos(lidar_data['angle'])
-        lidar_data['y'] = lidar_data['robot_y'] + lidar_data['distance'] * np.sin(lidar_data['angle'])
+        lidar_data['x'] = lidar_data['robot_x'] + lidar_data['distance'] * np.cos(lidar_data['angle'] + lidar_data['robot_dir'])
+        lidar_data['y'] = lidar_data['robot_y'] + lidar_data['distance'] * np.sin(lidar_data['angle'] + lidar_data['robot_dir'])
 
         # Write out to file
         lidar_data.to_csv("data/lidar_record_{count}.csv")
