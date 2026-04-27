@@ -92,11 +92,11 @@ void setup() {
 // Here is where you define the sensor outputs you want to receive
 void setReports(void) {
   Serial.println("Setting desired reports");
-  if (myIMU.enableAccelerometer() == true) {
-    Serial.println(F("Accelerometer enabled"));
+  if (myIMU.enableLinearAccelerometer() == true) {
+    Serial.println(F("LinearAccelerometer enabled"));
     Serial.println(F("Output in form x, y, z, in m/s^2"));
   } else {
-    Serial.println("Could not enable accelerometer");
+    Serial.println("Could not enable linear accelerometer");
   }
 }
 
@@ -112,15 +112,14 @@ void loop() {
   if (myIMU.getSensorEvent() == true) {
 
     // is it the correct sensor data we want?
-    if (myIMU.getSensorEventID() == SENSOR_REPORTID_ACCELEROMETER) {
-
+    if (myIMU.getSensorEventID() == SENSOR_REPORTID_LINEAR_ACCELERATION) {
       
       // uint64_t timeStamp = myIMU.getTimeStamp();
 
       //acceleration
-      float x = myIMU.getAccelX();
-      float y = myIMU.getAccelY();
-      float z = myIMU.getAccelZ();
+      float x = myIMU.getLinAccelX();
+      float y = myIMU.getLinAccelY();
+      float z = myIMU.getLinAccelZ();
 
       //quaterions
       float qw = myIMU.getQuatReal();
