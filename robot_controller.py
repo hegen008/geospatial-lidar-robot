@@ -37,7 +37,7 @@ recording_count = 0
 # Give 1 minute to put robot inplace before starting imu 
 print("You have one minute to get the robot to the starting position. Then, IMU will start recording.")
 time.sleep(60)
-print("IMU recording. Wait five  seconds before driving robot.")
+print("IMU recording. Wait five seconds before driving robot.")
 
 # Initialize IMU logger instance and start recording
 imu_logger = imu_logger.IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_path='data/imu_output.csv')
