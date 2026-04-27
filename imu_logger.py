@@ -20,7 +20,7 @@ class IMUSerialLogger:
             writer.writerow([
                 "timestamp_us",
                 "ax", "ay", "az",
-                "qw", "qx", "qy", "qz"
+                "gx", "gy", "gz"
             ])
 
     def _open_serial(self):
@@ -50,7 +50,7 @@ class IMUSerialLogger:
                 continue
 
             try:
-                ax, ay, az, qw, qx, qy, qz = map(float, parts)
+                ax, ay, az, gx, gy, gz = map(float, parts)
             except ValueError:
                 print("Skipping non-numeric line:", line)
                 continue
@@ -62,7 +62,7 @@ class IMUSerialLogger:
                 writer.writerow([
                     timestamp_us,
                     ax, ay, az,
-                    qw, qx, qy, qz
+                    gx, gy, gz
                 ])
 
         print("IMU logging stopped.")
