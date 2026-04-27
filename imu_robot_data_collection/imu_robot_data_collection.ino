@@ -138,7 +138,7 @@ void loop() {
       Serial.print(F(","));
       Serial.print(gy, 2);
       Serial.print(F(","));
-      Serial.print(gx, 2);
+      Serial.print(gz, 2);
 
       Serial.println();
     }
