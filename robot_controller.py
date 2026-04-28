@@ -8,6 +8,7 @@ from imu_integration import IMUIntegrator
 import imu_logger
 import pandas as pd
 import numpy as np
+from matplotlib import pyplot as plt
 
 # Initialize controller
 pygame.init()
@@ -121,6 +122,10 @@ while True:
         # Calculate lidar position
         lidar_data['x'] = lidar_data['robot_x'] + lidar_data['distance'] * np.cos(lidar_data['angle'] + lidar_data['robot_dir'])
         lidar_data['y'] = lidar_data['robot_y'] + lidar_data['distance'] * np.sin(lidar_data['angle'] + lidar_data['robot_dir'])
+
+        # Plot LiDAR data and save to file
+        plt.scatter(lidar_data['x'], lidar_data['y'], s=0.5)
+        plt.savefig(f"plots/lidar_plot_{count}.png")
 
         # Write out to file
         lidar_data.to_csv(f"data/lidar_record_{count}.csv")
