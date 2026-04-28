@@ -20,7 +20,7 @@ class IMUSerialLogger:
             writer.writerow([
                 "timestamp_us",
                 "ax", "ay", "az",
-                "qw", "qx", "qy", "qz"
+                "gx", "gy", "gz"
             ])
 
     def _open_serial(self):
@@ -45,12 +45,12 @@ class IMUSerialLogger:
 
             parts = line.split(",")
 
-            if len(parts) != 7:
+            if len(parts) != 6:
                 print("Skipping malformed line:", line)
                 continue
 
             try:
-                ax, ay, az, qw, qx, qy, qz = map(float, parts)
+                ax, ay, az, gx, gy, gz = map(float, parts)
             except ValueError:
                 print("Skipping non-numeric line:", line)
                 continue
@@ -62,7 +62,7 @@ class IMUSerialLogger:
                 writer.writerow([
                     timestamp_us,
                     ax, ay, az,
-                    qw, qx, qy, qz
+                    gx, gy, gz
                 ])
 
         print("IMU logging stopped.")
@@ -93,7 +93,7 @@ class IMUSerialLogger:
 ''' example usage:
 from imu_logger_threaded import IMUSerialLogger
 
-logger = IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_path="imu_data.csv")
+logger = IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_path="imu_output.csv")
 
 logger.start()
 time.sleep(10)   # collect data for 10 seconds, only needed for example

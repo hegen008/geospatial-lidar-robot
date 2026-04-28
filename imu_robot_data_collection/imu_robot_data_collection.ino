@@ -2,13 +2,12 @@
   Using the BNO08x IMU
 
   This example shows how to output accelerometer values.
-  Udpdate: Altered to also record gyro values and timestamp
+
+  Edited to include gyro values by Luka Pearson, April 27, 2026.
 
   By: Nathan Seidle
-  Modified by: Luka Pearson
   SparkFun Electronics
   Date: December 21st, 2017
-  Date Modified: April 14th, 2026
   SparkFun code, firmware, and software is released under the MIT License.
 	Please see LICENSE.md for further details.
 
@@ -91,16 +90,20 @@ void setup() {
 
 // Here is where you define the sensor outputs you want to receive
 void setReports(void) {
+  // check accelerometer
   Serial.println("Setting desired reports");
   if (myIMU.enableAccelerometer() == true) {
     Serial.println(F("Accelerometer enabled"));
-    Serial.println(F("Output in form x, y, z, in m/s^2"));
+    Serial.println(F("Output in form x, y, and z in m/s^2"));
+    Serial.println(F("Gyro enabled"));
+    Serial.println(F("Output in form x, y, z, in radians per second"));
   } else {
-    Serial.println("Could not enable accelerometer");
+    Serial.println("Could not enable accelerometer and gyro");
   }
 }
 
 void loop() {
+
   delay(10);
 
   if (myIMU.wasReset()) {
@@ -114,39 +117,28 @@ void loop() {
     // is it the correct sensor data we want?
     if (myIMU.getSensorEventID() == SENSOR_REPORTID_ACCELEROMETER) {
 
-      
-      // uint64_t timeStamp = myIMU.getTimeStamp();
+      // get accelerometer x and y (z is up and down, don't need)
+      float ax = myIMU.getAccelX();
+      float ay = myIMU.getAccelY();
+      float az = myIMU.getAccelZ()
 
-      //acceleration
-      float x = myIMU.getAccelX();
-      float y = myIMU.getAccelY();
-      float z = myIMU.getAccelZ();
+      // get gyro x, y, and z (angular velocity)
+      float gx = myIMU.getGyroX();
+      float gy = myIMU.getGyroY();
+      float gz = myIMU.getGyroZ();
 
-      //quaterions
-      float qw = myIMU.getQuatReal();
-      float qx = myIMU.getQuatI();
-      float qy = myIMU.getQuatJ();
-      float qz = myIMU.getQuatK();
-
-      //float gx = myIMU.getGyroX();
-      //float gy = myIMU.getGyroY();
-
-      // acceleration
-      Serial.print(x, 2);
+      // print values to serial
+      Serial.print(ax, 2);
       Serial.print(F(","));
-      Serial.print(y, 2);
+      Serial.print(ay, 2);
       Serial.print(F(","));
-      Serial.print(z, 2);
-      
-      // quaterions
+      Serial.print(az, 2);
       Serial.print(F(","));
-      Serial.print(qw, 2);
+      Serial.print(gx, 2);
       Serial.print(F(","));
-      Serial.print(qx, 2);
+      Serial.print(gy, 2);
       Serial.print(F(","));
-      Serial.print(qy, 2);
-      Serial.print(F(","));
-      Serial.print(qz, 2);
+      Serial.print(gz, 2);
 
       Serial.println();
     }

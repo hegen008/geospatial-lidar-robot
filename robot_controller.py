@@ -37,7 +37,7 @@ recording_count = 0
 # Give 1 minute to put robot inplace before starting imu 
 print("You have one minute to get the robot to the starting position. Then, IMU will start recording.")
 time.sleep(60)
-print("IMU recording. Wait five  seconds before driving robot.")
+print("IMU recording. Wait five seconds before driving robot.")
 
 # Initialize IMU logger instance and start recording
 imu_logger = imu_logger.IMUSerialLogger(port='/dev/ttyACM0', baud=115200, csv_path='data/imu_output.csv')
@@ -113,7 +113,7 @@ imu.process()
 count = 0
 while True:
     try:
-        lidar_data = pd.read_csv("data/lidar_record_{count}.csv")
+        lidar_data = pd.read_csv(f"data/lidar_record_{count}.csv")
 
         # Fill in robot position
         lidar_data[['robot_x', 'robot_y', 'robot_dir']] = lidar_data['unix_time'].apply(imu.location_from_time).apply(pd.Series)
@@ -123,7 +123,7 @@ while True:
         lidar_data['y'] = lidar_data['robot_y'] + lidar_data['distance'] * np.sin(lidar_data['angle'] + lidar_data['robot_dir'])
 
         # Write out to file
-        lidar_data.to_csv("data/lidar_record_{count}.csv")
+        lidar_data.to_csv(f"data/lidar_record_{count}.csv")
 
         count += 1
 
