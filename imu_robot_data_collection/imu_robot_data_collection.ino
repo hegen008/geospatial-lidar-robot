@@ -59,6 +59,14 @@ BNO08x myIMU;
 #define BNO08X_ADDR 0x4B  // SparkFun BNO08x Breakout (Qwiic) defaults to 0x4B
 //#define BNO08X_ADDR 0x4A // Alternate address if ADR jumper is closed
 
+// initialize vars
+float ax;
+float ay;
+float az;
+float gx;
+float gy;
+float gz;
+
 void setup() {
   Serial.begin(115200);
   
@@ -85,6 +93,7 @@ void setup() {
   setReports();
 
   Serial.println("Reading events");
+
   delay(100);
 }
 
@@ -92,7 +101,7 @@ void setup() {
 void setReports(void) {
   // check accelerometer
   Serial.println("Setting desired reports");
-  if (myIMU.enableAccelerometer() == true) {
+  if (myIMU.enableAccelerometer() == true && myIMU.enableGyro() == true) {
     Serial.println(F("Accelerometer enabled"));
     Serial.println(F("Output in form x, y, and z in m/s^2"));
     Serial.println(F("Gyro enabled"));
@@ -104,7 +113,7 @@ void setReports(void) {
 
 void loop() {
 
-  delay(10);
+  delayMicroseconds(10);
 
   if (myIMU.wasReset()) {
     Serial.print("sensor was reset ");
@@ -114,33 +123,34 @@ void loop() {
   // Has a new event come in on the Sensor Hub Bus?
   if (myIMU.getSensorEvent() == true) {
 
+  uint8_t reportID = myIMU.getSensorEventID();
     // is it the correct sensor data we want?
-    if (myIMU.getSensorEventID() == SENSOR_REPORTID_ACCELEROMETER) {
+    if (reportID == SENSOR_REPORTID_ACCELEROMETER) {
 
       // get accelerometer x and y (z is up and down, don't need)
-      float ax = myIMU.getAccelX();
-      float ay = myIMU.getAccelY();
-      float az = myIMU.getAccelZ()
-
-      // get gyro x, y, and z (angular velocity)
-      float gx = myIMU.getGyroX();
-      float gy = myIMU.getGyroY();
-      float gz = myIMU.getGyroZ();
-
-      // print values to serial
-      Serial.print(ax, 2);
-      Serial.print(F(","));
-      Serial.print(ay, 2);
-      Serial.print(F(","));
-      Serial.print(az, 2);
-      Serial.print(F(","));
-      Serial.print(gx, 2);
-      Serial.print(F(","));
-      Serial.print(gy, 2);
-      Serial.print(F(","));
-      Serial.print(gz, 2);
-
-      Serial.println();
+      ax = myIMU.getAccelX();
+      ay = myIMU.getAccelY();
+      az = myIMU.getAccelZ();
     }
+    if (reportID == SENSOR_REPORTID_GYROSCOPE_CALIBRATED) {
+      // get gyro x, y, and z (angular velocity)
+      gx = myIMU.getGyroX();
+      gy = myIMU.getGyroY();
+      gz = myIMU.getGyroZ();
+    }
+    // print values to serial
+    Serial.print(ax, 2);
+    Serial.print(F(","));
+    Serial.print(ay, 2);
+    Serial.print(F(","));
+    Serial.print(az, 2);
+    Serial.print(F(","));
+    Serial.print(gx, 2);
+    Serial.print(F(","));
+    Serial.print(gy, 2);
+    Serial.print(F(","));
+    Serial.print(gz, 2);
+
+    Serial.println();
   }
 }
