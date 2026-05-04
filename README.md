@@ -84,7 +84,7 @@ error code
 
 ### Input from Keyboard/Mouse/Sensor Connected via USB Not Registering:
 
-Sometimes input from a keyboard or omuse plugged into the robot's USB ports won't register.\
+Sometimes input from a keyboard or omuse plugged into the robot's USB ports won't register.
 
 #### To fix this error:
 1. Refrain from using that port and/or turn the robot off and back on again.
