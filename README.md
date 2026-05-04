@@ -64,3 +64,12 @@ IndexError: list index out of range
 
 #### To fix this error:
 1. You can ignore this error.
+
+### Filepath Permissions Error:
+~~~
+QStandardPaths: wrong permissions on runtime directory /run/user/1000, 0770 instead of 0700
+~~~
+
+#### To fix this error:
+1. You can ignore this error.
+
