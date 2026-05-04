@@ -73,3 +73,32 @@ QStandardPaths: wrong permissions on runtime directory /run/user/1000, 0770 inst
 #### To fix this error:
 1. You can ignore this error.
 
+
+### USB Port Not Found:
+~~~
+error code
+~~~
+
+#### To fix this error:
+1. Turn the robot off and back on again.
+
+### Input from Keyboard/Mouse/Sensor Connected via USB Not Registering:
+
+Sometimes input from a keyboard or omuse plugged into the robot's USB ports won't register.\
+
+#### To fix this error:
+1. Refrain from using that port and/or turn the robot off and back on again.
+
+### Raspberry Pi OS not Initializing
+~~~
+error code
+~~~
+#### To fix this error:
+1. Turn the robot off and back on again until it works.
+
+### QStandardPaths: Wrong permissions on runtime directory
+~~~
+error message
+~~~
+#### To fix this error:
+1. You can ignore this error.
