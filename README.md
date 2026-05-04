@@ -78,7 +78,39 @@ QStandardPaths: wrong permissions on runtime directory /run/user/1000, 0770 inst
 
 ### USB Port Not Found:
 ~~~
-error code
+Traceback (most recent call last):
+  File "/usr/lib/python3/dist-packages/serial/serialposix.py", line 322, in open
+    self.fd = os.open(self.portstr, os.O_RDWR | os.O_NOCTTY | os.O_NONBLOCK)
+              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+FileNotFoundError: [Errno 2] No such file or directory: '/dev/ttyUSB0'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "/home/pi/.local/lib/python3.11/site-packages/rplidar.py", line 126, in connect
+    self._serial_port = serial.Serial(
+                        ^^^^^^^^^^^^^^
+  File "/usr/lib/python3/dist-packages/serial/serialutil.py", line 244, in __init__
+    self.open()
+  File "/usr/lib/python3/dist-packages/serial/serialposix.py", line 325, in open
+    raise SerialException(msg.errno, "could not open port {}: {}".format(self._port, msg))
+serial.serialutil.SerialException: [Errno 2] could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: '/dev/ttyUSB0'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/pi/Desktop/geospatial-lidar-robot/robot_controller.py", line 35, in <module>
+    lidar_inst = LidarRecording()
+                 ^^^^^^^^^^^^^^^^
+  File "/home/pi/Desktop/geospatial-lidar-robot/lidar.py", line 24, in __init__
+    self.lidar = RPLidar(self.port)
+                 ^^^^^^^^^^^^^^^^^^
+  File "/home/pi/.local/lib/python3.11/site-packages/rplidar.py", line 117, in __init__
+    self.connect()
+  File "/home/pi/.local/lib/python3.11/site-packages/rplidar.py", line 131, in connect
+    raise RPLidarException('Failed to connect to the sensor '
+rplidar.RPLidarException: Failed to connect to the sensor due to: [Errno 2] could not open port /dev/ttyUSB0: [Errno 2] No such file or directory: '/dev/ttyUSB0'
 ~~~
 
 #### To fix this error:
@@ -86,7 +118,7 @@ error code
 
 ### Input from Keyboard/Mouse/Sensor Connected via USB Not Registering:
 
-Sometimes input from a keyboard or mouse plugged into the robot's USB ports won't register.
+Sometimes input from a keyboard or mouse plugged into the robot's USB ports won't register. When this happens, we generally notice that it is the top right USB port on the back of the robot.
 
 #### To fix this error:
 1. Refrain from using that port and/or turn the robot off and back on again.
@@ -98,11 +130,3 @@ error code
 
 #### To fix this error:
 1. Turn the robot off and back on again until it works.
-
-### QStandardPaths: Wrong permissions on runtime directory
-~~~
-error message
-~~~
-
-#### To fix this error:
-1. You can ignore this error.
