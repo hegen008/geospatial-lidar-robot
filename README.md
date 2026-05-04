@@ -36,9 +36,9 @@ RPLidar was used to get information from the LiDAR sensor: https://github.com/Ro
 IMU: ???
 
 
-Common Errors:
+## Common Errors:
 
-Joystick Error:
+### Joystick Error:
 ~~~
 /home/pi/.local/lib/python3.11/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
   warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
@@ -50,8 +50,17 @@ Traceback (most recent call last):
 IndexError: list index out of range
 ~~~
 
-To fix this error:
+#### To fix this error:
 1. Make sure the joystick is connected via Bluetooth to the robot.
 2. Exit out of the interactive Python mode in the terminal.
 3. Rerun the `python3 -m robot_controller.py` command.
 4. This normally fixes the issue.
+
+### Matplotlib Error:
+~~~
+/home/pi/.local/lib/python3.11/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+~~~
+
+#### To fix this error:
+1. You can ignore this error.
