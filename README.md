@@ -18,25 +18,32 @@ This project is an attempt at creating a robot that can map out the area it's in
 1. **Connect a controller:** We connected an XBox wireless controller to drive the robot. You can do this by clicking the bluetooth symbol in the top right of the Raspberry Pi's home screen, and then click "Connect Device". From there make sure your remote is in pairing mmode, and follow the given instructions.
 2. **Start robot_controller.py:** In the terminal, cd into `robot_controller.py`'s parent directory. Then, run `robot_controller.py` as a python script (`python3 -m robot_controller.py`).
 3. **Control the robot:** The top left joystick controls movement of the robot. The X button starts and stops LiDAR recording. The Y button exits `robot_controller.py`.
-4. Using the LiDAR data, one can use other software/programs to map out the area in which data was recorded.
+4. **Wait for post-processing:** After pressing the Y button to stop the robot, it may take a few mintues until all of the data is saved, processed, and plotted. Do not turn off the robot. Wait until the program ends to run any commands or exit the python interpreter or terminal.
+5. Using the LiDAR data, one can use other software/programs to map out the area in which data was recorded.
 
 **Note:** Data file and plots are deleted and dynamically created each time robot_controller.py is run. If you would like to permenantly save your data, copy and save it elsewhere manually.
 
 ## About the Data:
-**LiDAR variables:**\
-angle_data: The angle at which LiDAR point data was taken.\
-dist_data: Distance LiDAR point is from the sensor.\
-time_data: Gives the time of recordings in Unix format.
+**LiDAR variables:**
+- angle_data: The angle at which LiDAR point data was taken.
+- dist_data: Distance LiDAR point is from the sensor.
+- time_data: Gives the time of recordings in Unix format.
 
-**IMU Variables:**\
-???
-
+**IMU Variables:**
+- ax, ay, az: Acceleration, as measured by the accelerometer, in the x, y, and z directions in meters/second^2. Only ax and ay are used.
+- gx, gy, gz: Angular velocity, as measured by the gyroscope, around the x, y, and z axes in radians/second. Only rotation around the z axis is measured.
 
 ## References:
-PyGame was used to grab input from the controller: https://www.pygame.org/docs/ \
-RPLidar was used to get information from the LiDAR sensor: https://github.com/Roboticia/RPLidar \
-IMU: ???
+- PyGame was used to grab input from the controller: https://www.pygame.org/docs/ 
+- RPLidar was used to get information from the LiDAR sensor: https://github.com/Roboticia/RPLidar 
+- The following GitHub repository was used to set up the IMU hardware and software: https://github.com/sparkfun/SparkFun_VR_IMU_Breakout_BNO086_QWIIC
+- The following Github repository was used to create the IMU's Arduino code: https://github.com/sparkfun/SparkFun_BNO08x_Arduino_Library
 
+## Hardware:
+- Robot and RaspberryPi: Yahboom's Raspbot V2 kit
+- LiDAR: Slamtec's RPLIDAR A1M8
+- IMU: SparkFun's VR IMU Breakout - BNO086 (Qwiic)
+- Microcontroller (for IMU): DFRobot's Beetle ESP32-C6
 
 ## Common Errors:
 
@@ -74,7 +81,6 @@ QStandardPaths: wrong permissions on runtime directory /run/user/1000, 0770 inst
 
 #### To fix this error:
 1. You can ignore this error.
-
 
 ### USB Port Not Found:
 ~~~
@@ -123,10 +129,19 @@ Sometimes input from a keyboard or mouse plugged into the robot's USB ports won'
 #### To fix this error:
 1. Refrain from using that port and/or turn the robot off and back on again.
 
-### Raspberry Pi OS not Initializing
+### Raspberry Pi OS Not Initializing
 ~~~
 error code
 ~~~
 
 #### To fix this error:
 1. Turn the robot off and back on again until it works.
+
+### No Serial Output from the ESP32 Microcontroller:
+Lack of serial output can be determined from the Arduino IDE or from lack of data in the IMU files.
+
+### To fix this error:
+1. Open the Arduino IDE.
+2. Plug the IMU microcontroller into your computer via a USB port.
+3. From the menu bar at the top of the screen, click 'Tools' and navigate to 'USB CDC On Boot:' in the dropdown and change it to 'Enabled'.
+4. Compile and upload your .ino code to the microcontroller.
