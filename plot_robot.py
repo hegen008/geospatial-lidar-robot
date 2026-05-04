@@ -1,11 +1,11 @@
 import pandas as pd
 from matplotlib import pyplot as plt
 
-file = "data/lidar_record_0.csv"
+file = "data/imu_integration.csv"
 
 data = pd.read_csv(file)
 
-plt.scatter(data['robot_x'], data['robot_y'])
+plt.scatter(data['px'], data['py'])
 plt.savefig('robot1.png')
 
 
