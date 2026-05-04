@@ -20,6 +20,8 @@ This project is an attempt at creating a robot that can map out the area it's in
 3. **Control the robot:** The top left joystick controls movement of the robot. The X button starts and stops LiDAR recording. The Y button exits `robot_controller.py`.
 4. Using the LiDAR data, one can use other software/programs to map out the area in which data was recorded.
 
+**Note:** Data file and plots are deleted and dynamically created each time robot_controller.py is run. If you would like to permenantly save your data, copy and save it elsewhere manually.
+
 ## About the Data:
 **LiDAR variables:**\
 angle_data: The angle at which LiDAR point data was taken.\
@@ -84,7 +86,7 @@ error code
 
 ### Input from Keyboard/Mouse/Sensor Connected via USB Not Registering:
 
-Sometimes input from a keyboard or omuse plugged into the robot's USB ports won't register.
+Sometimes input from a keyboard or mouse plugged into the robot's USB ports won't register.
 
 #### To fix this error:
 1. Refrain from using that port and/or turn the robot off and back on again.
@@ -93,6 +95,7 @@ Sometimes input from a keyboard or omuse plugged into the robot's USB ports won'
 ~~~
 error code
 ~~~
+
 #### To fix this error:
 1. Turn the robot off and back on again until it works.
 
@@ -100,5 +103,6 @@ error code
 ~~~
 error message
 ~~~
+
 #### To fix this error:
 1. You can ignore this error.
