@@ -34,3 +34,21 @@ time_data: Gives the time of recordings in Unix format.
 PyGame was used to grab input from the controller: https://www.pygame.org/docs/ \
 RPLidar was used to get information from the LiDAR sensor: https://github.com/Roboticia/RPLidar \
 IMU: ???
+
+
+Common Errors:
+
+Joystick Error:
+/home/pi/.local/lib/python3.11/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
+  warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
+Traceback (most recent call last):
+  File "<stdin>", line 1, in <module>
+  File "/home/pi/Desktop/geospatial-lidar-robot/robot_controller.py", line 20, in <module>
+    joystick = joysticks[0]
+               ~~~~~~~~~^^^
+IndexError: list index out of range
+
+To fix this error:
+1. Make sure the joystick is connected via Bluetooth to the robot.
+2. Turn the robot off and then back on again.
+3. This normally fixes the issue.
