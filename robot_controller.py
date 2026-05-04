@@ -118,6 +118,7 @@ count = 0
 while True:
     try:
         lidar_data = pd.read_csv(f"data/lidar_record_{count}.csv")
+        print(f"Beginning to process LiDAR file: {count}")
 
         # Fill in robot position
         lidar_data[['robot_x', 'robot_y', 'robot_dir']] = lidar_data['unix_time'].apply(imu.location_from_time).apply(pd.Series)
@@ -126,8 +127,11 @@ while True:
         lidar_data['x'] = lidar_data['robot_x'] + lidar_data['distance'] * np.cos(np.deg2rad(lidar_data['angle'] + lidar_data['robot_dir']))
         lidar_data['y'] = lidar_data['robot_y'] + lidar_data['distance'] * np.sin(np.deg2rad(lidar_data['angle'] + lidar_data['robot_dir']))
 
-        # Plot LiDAR data and save to file
+        # Plot LiDAR data and robot path and save to file
         plt.scatter(lidar_data['x'], lidar_data['y'], s=0.5)
+
+        plt.plot(lidar_data['robot_x'], lidar_data['robot_y'], color='red')
+
         plt.savefig(f"plots/lidar_plot_{count}.png")
         print("Saved plot of LiDAR data to /plots directory.")    
 
@@ -138,4 +142,5 @@ while True:
         count += 1
 
     except FileNotFoundError:
+        print("Post-processing complete.")
         break
