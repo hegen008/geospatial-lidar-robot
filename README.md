@@ -16,8 +16,8 @@ This project is an attempt at creating a robot that can map out the area it's in
 ## How to Use:
 *This assumes that both the LiDAR and IMU sensors are attaches to the robot.*
 1. **Connect a controller:** We connected an XBox wireless controller to drive the robot. You can do this by clicking the bluetooth symbol in the top right of the Raspberry Pi's home screen, and then click "Connect Device". From there make sure your remote is in pairing mmode, and follow the given instructions.
-2. **Start robot_controller.py:** In the terminal, cd into robot_controller.py's parent directory. Then, run robot_controller.py as a python script (ex. python -m robot_controller.py).
-3. **Control the robot:** The top left joystick controls movement of the robot. The X button starts and stops LiDAR recording. The Y button exits robot_controller.py.
+2. **Start robot_controller.py:** In the terminal, cd into `robot_controller.py`'s parent directory. Then, run `robot_controller.py` as a python script (`python3 -m robot_controller.py`).
+3. **Control the robot:** The top left joystick controls movement of the robot. The X button starts and stops LiDAR recording. The Y button exits `robot_controller.py`.
 4. Using the LiDAR data, one can use other software/programs to map out the area in which data was recorded.
 
 ## About the Data:
@@ -39,6 +39,7 @@ IMU: ???
 Common Errors:
 
 Joystick Error:
+~~~
 /home/pi/.local/lib/python3.11/site-packages/matplotlib/projections/__init__.py:63: UserWarning: Unable to import Axes3D. This may be due to multiple versions of Matplotlib being installed (e.g. as a system package and as a pip package). As a result, the 3D projection is not available.
   warnings.warn("Unable to import Axes3D. This may be due to multiple versions of "
 Traceback (most recent call last):
@@ -47,8 +48,10 @@ Traceback (most recent call last):
     joystick = joysticks[0]
                ~~~~~~~~~^^^
 IndexError: list index out of range
+~~~
 
 To fix this error:
 1. Make sure the joystick is connected via Bluetooth to the robot.
-2. Turn the robot off and then back on again.
-3. This normally fixes the issue.
+2. Exit out of the interactive Python mode in the terminal.
+3. Rerun the `python3 -m robot_controller.py` command.
+4. This normally fixes the issue.
