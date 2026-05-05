@@ -45,6 +45,9 @@ This project is an attempt at creating a robot that can map out the area it's in
 - IMU: SparkFun's VR IMU Breakout - BNO086 (Qwiic)
 - Microcontroller (for IMU): DFRobot's Beetle ESP32-C6
 
+## Note Regarding The Git Profile on the Robot's Raspberry Pi
+We are currently unable to push changes made on the Raspberry Pi to GitHub because of a user called CaptRad who we cannot seem to log out. We have tried editing the Git config username and password, and this has not worked. When we edited code on the Raspberry Pi, our workaround solution to this problem was to manually upload these files to the GitHub repo in a browser. If someone in the future can figure out how to logout CaptRad and get it working to push files to the repo directly from the Raspberry Pi, that would be great.
+
 ## Common Errors:
 
 ### Joystick Error:
